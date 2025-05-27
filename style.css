@@ -80,3 +80,30 @@ li {
 #refresh-button:hover {
     background-color: #0056b3;
 }
+/* Existing styles... */
+
+/* New styles for guidance text and disclaimers */
+.guidance {
+    font-size: 0.9em;
+    color: #555;
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.guidance a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.guidance a:hover {
+    text-decoration: underline;
+}
+
+.note-disclaimer {
+    font-size: 0.85em;
+    color: #777;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px dashed #e0e0e0;
+}

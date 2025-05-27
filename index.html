@@ -16,6 +16,81 @@
         <div id="results" style="display: none;">
             <h2>Audit Results</h2>
             <div class="result-section">
+                <h3>Custom Code in &lt;head&gt; (Selected Page)</h3>
+                <pre id="head-code-display" class="code-block"></pre>
+                <h4>External Resources in &lt;head&gt;:</h4>
+                <ul id="head-scripts-list"></ul>
+            </div>
+
+            <div class="result-section">
+                <h3>Custom Code in &lt;body&gt; (Selected Page)</h3>
+                <pre id="body-code-display" class="code-block"></pre>
+                <h4>External Resources in &lt;body&gt;:</h4>
+                <ul id="body-scripts-list"></ul>
+            </div>
+
+            <div class="result-section" id="security-headers-section">
+                <h3>Security Header Best Practices</h3>
+                <p>Security headers are crucial for protecting your website against common web vulnerabilities like Cross-Site Scripting (XSS), clickjacking, and more. While they are usually set on your web server or CDN, it's vital to ensure your published Webflow site utilizes them.</p>
+
+                <h4>Key Security Headers to Check on Your Published Site:</h4>
+                <ul>
+                    <li>
+                        <strong>Content-Security-Policy (CSP):</strong>
+                        <p>Controls which resources the user agent is allowed to load. Helps prevent XSS attacks by whitelisting trusted sources of content.</p>
+                        <p class="guidance"><strong>How to check:</strong> Use your browser's developer tools (Network tab, check response headers) or online tools like <a href="https://csp-evaluator.withgoogle.com/" target="_blank">CSP Evaluator</a> or <a href="https://securityheaders.com/" target="_blank">SecurityHeaders.com</a>. Webflow Enterprise offers custom security headers; for other plans, consider Cloudflare.</p>
+                    </li>
+                    <li>
+                        <strong>Strict-Transport-Security (HSTS):</strong>
+                        <p>Ensures that browsers always connect to your site over HTTPS, even if the user types `http://`. Prevents downgrade attacks.</p>
+                        <p class="guidance"><strong>How to check:</strong> Browser developer tools (Network tab, check response headers) or SecurityHeaders.com. Webflow automatically enforces HTTPS, and HSTS is typically set by Webflow for published sites. Verify its presence and max-age.</p>
+                    </li>
+                    <li>
+                        <strong>X-Frame-Options:</strong>
+                        <p>Prevents your site from being embedded in an `<iframe>` on another domain, protecting against clickjacking attacks.</p>
+                        <p class="guidance"><strong>How to check:</strong> Browser developer tools (Network tab, check response headers) or SecurityHeaders.com. Recommended value: `SAMEORIGIN` or `DENY`.</p>
+                    </li>
+                    <li>
+                        <strong>X-Content-Type-Options:</strong>
+                        <p>Prevents browsers from MIME-sniffing a response away from the declared content-type. This can prevent XSS attacks where the browser might misinterpret a file's type.</p>
+                        <p class="guidance"><strong>How to check:</strong> Browser developer tools (Network tab, check response headers) or SecurityHeaders.com. Recommended value: `nosniff`.</p>
+                    </li>
+                    <li>
+                        <strong>Referrer-Policy:</strong>
+                        <p>Controls how much referrer information (the URL of the previous page) is sent with requests. Helps protect user privacy and sensitive data.</p>
+                        <p class="guidance"><strong>How to check:</strong> Browser developer tools (Network tab, check response headers) or SecurityHeaders.com. Recommended value: `no-referrer-when-downgrade` or `same-origin`.</p>
+                    </li>
+                </ul>
+                <p class="note-disclaimer">
+                    <strong>Note:</strong> These headers are set by your web server or CDN for your <strong>published Webflow site</strong>. This app cannot directly check them from within the Webflow Designer. Use the recommended tools to audit your live site.
+                </p>
+            </div>
+            <button id="refresh-button">Refresh Audit</button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/@webflow/designer-plugin-sdk@latest/dist/plugin-sdk.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webflow Security Auditor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Webflow Security Auditor</h1>
+        <p>Analyze custom code and external resources in your Webflow project.</p>
+
+        <div id="status-message" class="status">Loading project data...</div>
+
+        <div id="results" style="display: none;">
+            <h2>Audit Results</h2>
+            <div class="result-section">
                 <h3>Custom Code in &lt;head&gt;</h3>
                 <pre id="head-code-display" class="code-block"></pre>
                 <h4>External Resources in &lt;head&gt;:</h4>
