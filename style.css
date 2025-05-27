@@ -107,3 +107,34 @@ li {
     padding-top: 10px;
     border-top: 1px dashed #e0e0e0;
 }
+/* Existing styles... */
+
+/* Styles for categorized external resources */
+.resource-item {
+    padding: 8px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+}
+
+.resource-category-safe {
+    background-color: #e6ffe6; /* Light green */
+    border: 1px solid #a3e6a3;
+    color: #28a745; /* Darker green text */
+}
+
+.resource-category-unknown {
+    background-color: #fff3cd; /* Light yellow */
+    border: 1px solid #ffeeba;
+    color: #856404; /* Darker yellow text */
+}
+
+.resource-category-local {
+    background-color: #e0f7fa; /* Light blue */
+    border: 1px solid #b2ebf2;
+    color: #007bff; /* Darker blue text */
+}
+
+.resource-category-none {
+    font-style: italic;
+    color: #666;
+}
